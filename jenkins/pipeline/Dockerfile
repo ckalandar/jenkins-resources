@@ -2,10 +2,15 @@ FROM jenkins/jenkins
 
 USER root
 
-# Install ansible
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && python get-pip.py
+#Install Python
 
-RUN pip install -U ansible
+RUN apt -y update && \
+    apt -y install python3 python3-pip
+
+# Install ansible
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py && \
+    pip3 install ansible --upgrade
 
 # Install Docker
 
